@@ -4,13 +4,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
     faCircleXmark,
     faSpinner,
-    faMagnifyingGlass,
     faSignIn,
     faEllipsisVertical,
     faEarthAsia,
     faCircleQuestion,
     faKeyboard,
-    faCloudUpload,
     faUser,
     faCoins,
     faGear,
@@ -26,6 +24,8 @@ import images from '~/assets/images';
 import AccountItem from '~/components/AccountItem';
 import Button from '~/components/Button';
 import Menu from '~/components/Popper/Menu';
+import { SearchIcon, UploadIcon, InboxIcon, MessageIcon } from '~/components/Icons';
+import Image from '~/components/Image';
 
 const css = classNames.bind(styles);
 
@@ -134,7 +134,7 @@ function Header() {
                         <FontAwesomeIcon className={css('loading')} icon={faSpinner} />
 
                         <button className={css('search-btn')}>
-                            <FontAwesomeIcon icon={faMagnifyingGlass} />
+                            <SearchIcon />
                         </button>
                     </div>
                 </HeadlessTipy>
@@ -142,9 +142,20 @@ function Header() {
                 <div className={css('actions')}>
                     {currentUser ? (
                         <>
-                            <Tipy delay={[0, 200]} content="Upload videos" placement="bottom">
+                            <Tipy delay={[0, 50]} content="Upload videos" placement="bottom">
                                 <button className={css('action-btn')}>
-                                    <FontAwesomeIcon icon={faCloudUpload} />
+                                    <UploadIcon />
+                                </button>
+                            </Tipy>
+                            <Tipy delay={[0, 50]} content="Message" placement="bottom">
+                                <button className={css('action-btn')}>
+                                    <MessageIcon />
+                                </button>
+                            </Tipy>
+                            <Tipy delay={[0, 50]} content="Inbox" placement="bottom">
+                                <button className={css('action-btn')}>
+                                    <InboxIcon />
+                                    <span className={css('badge')}>12</span>
                                 </button>
                             </Tipy>
                         </>
@@ -158,7 +169,7 @@ function Header() {
                     )}
                     <Menu items={currentUser ? userMenu : MENU_ITEMS} onChange={handleMenuChange}>
                         {currentUser ? (
-                            <img
+                            <Image
                                 className={css('user-avatar')}
                                 src="https://p16-sign-sg.tiktokcdn.com/tos-alisg-avt-0068/63fce0ef15352f453b4694cfb5671c12~tplv-tiktokx-cropcenter:100:100.jpeg?dr=14579&refresh_token=1dc38199&x-expires=1758254400&x-signature=rN0M7hIP%2BsjPJA2vvGpwCXhE6QI%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=my2"
                                 alt="Nguyen van A"
