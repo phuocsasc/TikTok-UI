@@ -14,14 +14,26 @@ function Search() {
     const [searchValue, setSearchValue] = useState('');
     const [searchResult, setSearchResult] = useState([]);
     const [showResult, setShowResult] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     const inputRef = useRef();
 
     useEffect(() => {
-        setTimeout(() => {
-            setSearchResult([1, 2, 3]);
-        }, 0);
-    }, []);
+        if (!searchValue.trim()) {
+            setSearchResult([])
+            return
+        }
+        setLoading(true)
+        fetch(`https://tiktok.fullstack.edu.vn/api/users/search?q=${encodeURIComponent(searchValue)}&type=less`)
+            .then((res) => res.json())
+            .then((res) => {
+                setSearchResult(res.data);
+                setLoading(false)
+            })
+            .catch(() => {
+                setLoading(false)
+            })
+    }, [searchValue]);
 
     const handleClear = () => {
         setSearchValue('');
@@ -35,43 +47,46 @@ function Search() {
     return (
         <HeadlessTipy
             interactive
+            appendTo="parent"
             visible={showResult && searchResult.length > 0}
             render={(attrs) => (
                 <div className={css('search-result')} tabIndex={-1} {...attrs}>
                     <PopperWrapper>
                         <h4 className={css('search-title')}>Accounts</h4>
-                        <AccountItem />
-                        <AccountItem />
-                        <AccountItem />
+                        {searchResult.map((result) => {
+                            return <AccountItem key={result.id} data={result} />;
+                        })}
                     </PopperWrapper>
                 </div>
             )}
             onClickOutside={handleHideResult}
         >
-            <div className={css('search')}>
-                <input
-                    ref={inputRef}
-                    value={searchValue}
-                    placeholder="Search accounts and videos"
-                    spellCheck={false}
-                    onChange={(e) => setSearchValue(e.target.value)}
-                    onFocus={() => setShowResult(true)}
-                />
-                {!!searchValue && (
-                    <button
-                        className={css('clear')}
-                        onClick={() => {
-                            handleClear();
-                        }}
-                    >
-                        <FontAwesomeIcon icon={faCircleXmark} />
-                    </button>
-                )}
-                {/* <FontAwesomeIcon className={css('loading')} icon={faSpinner} /> */}
+            <div>
+                <div className={css('search')}>
+                    <input
+                        ref={inputRef}
+                        value={searchValue}
+                        placeholder="Search accounts and videos"
+                        spellCheck={false}
+                        onChange={(e) => setSearchValue(e.target.value)}
+                        onFocus={() => setShowResult(true)}
+                    />
+                    {!!searchValue && !loading && (
+                        <button
+                            className={css('clear')}
+                            onClick={() => {
+                                handleClear();
+                            }}
+                        >
+                            <FontAwesomeIcon icon={faCircleXmark} />
+                        </button>
+                    )}
+                    {loading && <FontAwesomeIcon className={css('loading')} icon={faSpinner} />}
 
-                <button className={css('search-btn')}>
-                    <SearchIcon />
-                </button>
+                    <button className={css('search-btn')}>
+                        <SearchIcon />
+                    </button>
+                </div>
             </div>
         </HeadlessTipy>
     );
