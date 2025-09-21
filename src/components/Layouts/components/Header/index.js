@@ -13,7 +13,9 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import Tipy from '@tippyjs/react';
 import 'tippy.js/dist/tippy.css';
+import { Link } from 'react-router-dom';
 
+import routesConfig from '~/config/routes';
 import styles from './Header.module.scss';
 import images from '~/assets/images';
 import Button from '~/components/Button';
@@ -96,9 +98,9 @@ function Header() {
     return (
         <header className={css('wrapper')}>
             <div className={css('inner')}>
-                <div className={css('logo')}>
+                <Link to={routesConfig.home} className={css('logo')}>
                     <img src={images.logo} alt="TikTok"></img>
-                </div>
+                </Link>
 
                 <Search />
 

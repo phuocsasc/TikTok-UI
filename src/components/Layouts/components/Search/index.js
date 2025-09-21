@@ -36,11 +36,8 @@ function Search() {
             setSearchResult(result)
             setLoading(false)
         }
-
         fetchApi()
 
-        
-       
     }, [debounced]);
 
     const handleClear = () => {
@@ -52,6 +49,19 @@ function Search() {
     const handleHideResult = () => {
         setShowResult(false);
     };
+
+    const handleChange = (e) => {
+        const searchValue = e.target.value
+        if (searchValue.startsWith(' ')) {
+            return 
+        }
+
+        setSearchValue(searchValue)
+    }
+
+    const handleSubmit = (e) => {
+        e.preventDefault()
+    }
     return (
         <HeadlessTipy
             interactive
@@ -76,22 +86,20 @@ function Search() {
                         value={searchValue}
                         placeholder="Search accounts and videos"
                         spellCheck={false}
-                        onChange={(e) => setSearchValue(e.target.value)}
+                        onChange={handleChange}
                         onFocus={() => setShowResult(true)}
                     />
                     {!!searchValue && !loading && (
                         <button
                             className={css('clear')}
-                            onClick={() => {
-                                handleClear();
-                            }}
+                            onClick={handleClear}
                         >
                             <FontAwesomeIcon icon={faCircleXmark} />
                         </button>
                     )}
                     {loading && <FontAwesomeIcon className={css('loading')} icon={faSpinner} />}
 
-                    <button className={css('search-btn')}>
+                    <button className={css('search-btn')} onMouseDown={handleSubmit}>
                         <SearchIcon />
                     </button>
                 </div>
