@@ -43,7 +43,7 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn 
             placement="bottom-end"
             render={(attrs) => (
                 <div className={css('menu-list')} tabIndex={-1} {...attrs}>
-                    <PopperWrapper className={css('menu-wrapper')}>
+                    <PopperWrapper className={css('menu-popper')}>
                         {history.length > 1 && (
                             <Header
                                 title="Language"
@@ -52,7 +52,7 @@ function Menu({ children, items = [], hideOnClick = false, onChange = defaultFn 
                                 }}
                             />
                         )}
-                        {renderItems()}
+                        <div className={css('menu-body')}>{renderItems()}</div>
                     </PopperWrapper>
                 </div>
             )}

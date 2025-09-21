@@ -136,7 +136,7 @@ function Header() {
                         {currentUser ? (
                             <Image
                                 className={css('user-avatar')}
-                                src="https://p16-sign-sg.tiktokcdn.com/tos-alisg-avt-0068/63fce0ef15352f453b4694cfb5671c12~tplv-tiktokx-cropcenter:100:100.jpeg?dr=14579&refresh_token=1dc38199&x-expires=1758254400&x-signature=rN0M7hIP%2BsjPJA2vvGpwCXhE6QI%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=my2"
+                                src="https://fullstack.edu.vn/assets/f8-icon-lV2rGpF0.png"
                                 alt="Nguyen van A"
                             />
                         ) : (

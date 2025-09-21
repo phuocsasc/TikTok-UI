@@ -65,7 +65,7 @@ function Search() {
     return (
         <HeadlessTipy
             interactive
-            appendTo="parent"
+            appendTo='parent'
             visible={showResult && searchResult.length > 0}
             render={(attrs) => (
                 <div className={css('search-result')} tabIndex={-1} {...attrs}>
@@ -79,30 +79,28 @@ function Search() {
             )}
             onClickOutside={handleHideResult}
         >
-            <div>
-                <div className={css('search')}>
-                    <input
-                        ref={inputRef}
-                        value={searchValue}
-                        placeholder="Search accounts and videos"
-                        spellCheck={false}
-                        onChange={handleChange}
-                        onFocus={() => setShowResult(true)}
-                    />
-                    {!!searchValue && !loading && (
-                        <button
-                            className={css('clear')}
-                            onClick={handleClear}
-                        >
-                            <FontAwesomeIcon icon={faCircleXmark} />
-                        </button>
-                    )}
-                    {loading && <FontAwesomeIcon className={css('loading')} icon={faSpinner} />}
-
-                    <button className={css('search-btn')} onMouseDown={handleSubmit}>
-                        <SearchIcon />
+            <div className={css('search')}>
+                <input
+                    ref={inputRef}
+                    value={searchValue}
+                    placeholder="Search accounts and videos"
+                    spellCheck={false}
+                    onChange={handleChange}
+                    onFocus={() => setShowResult(true)}
+                />
+                {!!searchValue && !loading && (
+                    <button
+                        className={css('clear')}
+                        onClick={handleClear}
+                    >
+                        <FontAwesomeIcon icon={faCircleXmark} />
                     </button>
-                </div>
+                )}
+                {loading && <FontAwesomeIcon className={css('loading')} icon={faSpinner} />}
+
+                <button className={css('search-btn')} onMouseDown={handleSubmit}>
+                    <SearchIcon />
+                </button>
             </div>
         </HeadlessTipy>
     );
