@@ -54,6 +54,7 @@ const MENU_ITEMS = [
     {
         icon: <FontAwesomeIcon icon={faKeyboard} />,
         title: 'Keyboard shortcuts',
+        to: '/keyboard',
     },
 ];
 
@@ -74,7 +75,7 @@ function Header() {
         {
             icon: <FontAwesomeIcon icon={faUser} />,
             title: 'View profile',
-            to: '/@hoaa',
+            to: '/@user',
         },
         {
             icon: <FontAwesomeIcon icon={faCoins} />,
